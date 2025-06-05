@@ -18,38 +18,18 @@ const client = generateClient<Schema>();
 export default function App() {
     
   const { signOut } = useAuthenticator();
-  const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
-  function listTodos() {
-    client.models.Todo.observeQuery().subscribe({
-      next: (data) => setTodos([...data.items]),
-    });
-  }
 
-  useEffect(() => {
-    listTodos();
-  }, []);
 
-  function createTodo() {
-    client.models.Todo.create({
-      content: window.prompt("Todo content"),
-    });
-  }
 
   return (
     <main>
       <h1>Team Panacea!!!!!!</h1>
       <h1> </h1>
-      <button onClick={createTodo}>+ new</button>
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
-        ))}
-      </ul>
       <div>
      
       <FileUploader
-           acceptedFileTypes={[
+        acceptedFileTypes={[
             // you can list file extensions:
             '.gif',
             '.bmp',
@@ -62,9 +42,13 @@ export default function App() {
             'image/png',
             'video/*',
           ]}
-      path="public/"
-      maxFileCount={100}
-      isResumable
+        bucket={{
+            bucketName: 'team-panacea-s3-bucket',
+            region: 'us-west-2',
+          }}
+        path="public/"
+        maxFileCount={100}
+        isResumable
       />
 
       </div>
