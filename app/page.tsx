@@ -43,8 +43,8 @@ export default function App() {
             'video/*',
           ]}
         bucket={{
-            bucketName: 'team-panacea-s3-bucket',
-            region: 'us-west-2',
+            bucketName: 'personal-panacea-s3-bucket',
+            region: 'us-east-1',
           }}
         path="public/"
         maxFileCount={100}
