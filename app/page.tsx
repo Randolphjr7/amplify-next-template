@@ -2,23 +2,23 @@
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useState, useEffect } from "react";
 import { generateClient } from "aws-amplify/data";
-import type { Schema } from "@/amplify/data/resource";
+//import type { Schema } from "@/amplify/data/resource";
 import "./../app/app.css";
 import { Amplify } from "aws-amplify";
 import outputs from "@/amplify_outputs.json";
 import "@aws-amplify/ui-react/styles.css";
 
 import { FileUploader } from '@aws-amplify/ui-react-storage';
-
+import * as React from 'react';
+import { uploadData } from 'aws-amplify/storage';
 
 Amplify.configure(outputs);
 
-const client = generateClient<Schema>();
+//const client = generateClient<Schema>();
 
 export default function App() {
     
   const { signOut } = useAuthenticator();
-
 
 
 
@@ -43,10 +43,10 @@ export default function App() {
             'video/*',
           ]}
         bucket={{
-            bucketName: 'personal-panacea-s3-bucket',
-            region: 'us-east-1',
+            bucketName: 'team-panacea-s3-bucket',
+            region: 'us-east-2',
           }}
-        path="public/"
+        path="textract-bucket/"
         maxFileCount={100}
         isResumable
       />
@@ -56,4 +56,9 @@ export default function App() {
       <button onClick={signOut}>Sign out</button>
     </main>
   );
+
+
+
+  
+
 }
